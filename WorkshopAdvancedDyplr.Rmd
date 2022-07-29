@@ -25,6 +25,23 @@ library(palmerpenguins)
 - glimpse() 
 - distinct()
 
+
+# Data
+```{r}
+install.packages('tidytuesdayR')
+library(tidytuesdayR)
+tuesdata <- tidytuesdayR::tt_load('2022-05-31')
+
+poll <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-31/poll.csv')
+reputation <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-31/reputation.csv')
+
+youtube <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-02/youtube.csv')
+
+survey <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-18/survey.csv')
+
+```
+
+
 # Count Function
 
 `df %>% count(a, b)` is roughly equivalent to `df %>% group_by(a, b) %>% summarise(n = n())`.
@@ -74,7 +91,7 @@ columns, allowing you to use `select()` semantics inside in
 
 ## Basic Usage of Across()
 
-### Using across() with summarise()
+## Using across() with summarise()
 
 ```{r}
 penguins %>%
@@ -82,7 +99,7 @@ penguins %>%
                    n_distinct))
 ```
 
-### Using across() with mutate()
+## Using across() with mutate()
 
 ```{r}
 iris %>%
@@ -90,7 +107,7 @@ iris %>%
   mutate(across(c(Sepal.Length, Sepal.Width), round))
 ```
 
-### Using across() with Multiple functions
+## Using across() with Multiple functions
 
 ```{r}
 # if else statement in base R that is equivalent if_else from dplyr
@@ -119,20 +136,20 @@ penguins %>%
   mutate(across(where(is.numeric), ~if_else(is.na(.), mean(., na.rm = T), as.numeric(.))))
 ```
 
-## Case_when()
+# Case_when()
 
-### If_else()
+## If_else()
 
 ![](https://www.sharpsightlabs.com/wp-content/uploads/2021/03/case_when-R-featured-image.png)
 
 This function allows you to vectorize (and replace) multiple if_else()
 statements in a succinct and clear manner.
 
-### Syntax
+## Syntax
 
 ![](https://cdn-coiao.nitrocdn.com/CYHudqJZsSxQpAPzLkHFOkuzFKDpEHGF/assets/static/optimized/rev-b3f6ac8/wp-content/uploads/2021/03/r-case_when-simple-syntax-example.png)
 
-### Case_when() with mutate()
+## Case_when() with mutate()
 
 `case_when()` is particularly useful inside `mutate()` when you want to
 create a new variable that relies on a complex combination of existing
@@ -164,7 +181,7 @@ test_score_df %>%
   )
 ```
 
-### rownames_to_column()
+# rownames_to_column()
 
 How to convert row names to a column with the dplyr package.
 
@@ -183,12 +200,12 @@ data2 <- tibble::rownames_to_column(data2, "row_names")
 data2  
 ```
 
-### rowwise() (5 min)
+# rowwise() (5 min)
 
 `rowwise()` function that makes it easy to perform operations
 "row-by-row".
 
-#### Row-wise operations with rowwise()
+## Row-wise operations with rowwise()
 
 ```{r}
 df <- tibble(
@@ -225,7 +242,7 @@ df %>%
   summarise(m = mean(c(x, y, z)))
 ```
 
-### Glimpse()
+# Glimpse()
 
 `glimpse()` is like a transposed version of `print()`: columns run down
 the page, and data runs across. This makes it possible to see every
@@ -245,7 +262,7 @@ mtcars %>%
 glimpse(starwars)
 ```
 
-## Distinct()
+# Distinct()
 
 Select only unique/distinct rows from a data frame.
 
